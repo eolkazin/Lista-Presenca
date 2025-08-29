@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controle de Presença</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: #ffffff;
+        width: 95%;
+        max-width: 450px;
+        height: 95%;
+        border-radius: 25px;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        position: relative;
+    }
+
+    .header {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 50px;
+    }
+
+    .total {
+        background: #1976d2; /* azul padrão */
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #333333;
+        margin: 0;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .btn-presenca {
+        width: 100%;
+        flex: 1;
+        padding: 60px 0;
+        font-size: 2.5rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 35px;
+        color: #fff;
+        background: #0288d1; /* azul claro moderno */
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .btn-presenca:hover {
+        background: #0277bd;
+    }
+
+    .btn-presenca:active {
+        transform: scale(0.95);
+    }
+
+    .btn-finalizar {
+        width: 40%;
+        padding: 15px 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 25px;
+        color: #fff;
+        background: #d32f2f; /* vermelho padrão */
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .btn-finalizar:hover {
+        background: #b71c1c;
+    }
+
+    .datetime {
+        margin-top: 20px;
+        font-size: 1rem;
+        color: #555555;
+    }
+
+    @media(max-width: 420px){
+        h1 { font-size: 1.6rem; margin-bottom: 40px; }
+        .btn-presenca { font-size: 2rem; padding: 50px 0; }
+        .btn-finalizar { font-size: 1rem; padding: 12px 0; width: 50%; }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="total">Presentes: {{ total }}</div>
+            <h1>MARQUE SUA PRESENÇA</h1>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="presenca" class="btn-presenca">MARCAR</button>
+            <button type="submit" name="finalizar" class="btn-finalizar">Finalizar</button>
+        </form>
+        <div class="datetime">{{ agora|date:"d/m/Y H:i" }}</div>
+    </div>
+</body>
+</html>
